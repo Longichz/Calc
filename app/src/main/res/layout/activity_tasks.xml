@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TasksActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        style="@style/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:fontFamily="@font/ibm_plex_sans_semibold"
+        android:text="@string/select_task"
+        android:textSize="22sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_marginTop="25dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_marginHorizontal="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                style="@style/item">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_marginStart="15dp"
+                        android:layout_marginTop="15dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/text"
+                        android:fontFamily="@font/ibm_plex_sans_bold"
+                        android:textSize="16sp"
+                        android:text="@string/multiply"/>
+                    <TextView
+                        android:layout_marginStart="15dp"
+                        android:layout_marginBottom="15dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/textSecondary"
+                        android:alpha="0.7"
+                        android:textSize="14sp"
+                        android:text="@string/task_for_time"/>
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,27 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.Calc" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/grey_700</item>
+        <item name="colorPrimaryVariant">@color/grey_800</item>
+        <item name="colorOnPrimary">@color/black</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/blue_500</item>
+        <item name="colorSecondaryVariant">@color/blue_700</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+    <style name="text" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/ibm_plex_sans_medium</item>
+    </style>
+    <style name="textSecondary" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:textColor">@color/grey_200</item>
+        <item name="android:fontFamily">@font/ibm_plex_sans_medium</item>
+    </style>
+    <style name="item" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:background">@drawable/item_night</item>
+    </style>
+</resources>
