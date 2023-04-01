@@ -3,4 +3,18 @@
     <string name="select_task">Выберите задание</string>
     <string name="multiply">Таблица умножения</string>
     <string name="task_for_time">Задания на время</string>
+    <string name="tasks">Задания:</string>
+    <string name="time">Время:</string>
+    <string name="start">Начать</string>
+    <string name="back">Назад</string>
+    <string name="sec">сек.</string>
+
+    <string name="level_1">Уровень 1</string>
+    <string name="level_2">Уровень 2</string>
+    <string name="level_3">Уровень 3</string>
+
+    <string name="difficult_easy">Легкая</string>
+    <string name="difficult_medium">Средняя</string>
+    <string name="difficult_hard">Сложная</string>
+    <string name="difficult">Сложность:</string>
 </resources>

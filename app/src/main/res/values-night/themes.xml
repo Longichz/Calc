@@ -21,7 +21,14 @@
         <item name="android:textColor">@color/grey_200</item>
         <item name="android:fontFamily">@font/ibm_plex_sans_medium</item>
     </style>
+    <style name="textBlue" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:textColor">@color/blue_100</item>
+        <item name="android:fontFamily">@font/ibm_plex_sans_medium</item>
+    </style>
     <style name="item" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:background">@drawable/item_night</item>
+    </style>
+    <style name="popup" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:background">@drawable/popup_night</item>
     </style>
 </resources>
