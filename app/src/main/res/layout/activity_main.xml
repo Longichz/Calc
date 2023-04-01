@@ -22,6 +22,7 @@
         android:fontFamily="@font/ibm_plex_sans_semibold"
         android:text="@string/multiply"
         android:textSize="22sp"
+
         app:layout_constraintBottom_toTopOf="@+id/llPopupBackground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,6 +43,7 @@
             android:focusable="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:padding="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -201,28 +203,63 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvPopupDifficultHeader">
 
                 <TextView
+                    android:id="@+id/tvStart"
                     style="@style/text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="35dp"
+                    android:layout_marginHorizontal="50dp"
                     android:layout_marginVertical="12dp"
                     android:text="@string/start"
                     android:textColor="@color/easy_secondary"
                     android:textSize="16sp"
                     tools:ignore="TextContrastCheck" />
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/llLevels"
+                app:layout_constraintStart_toEndOf="@+id/llStart"
+                app:layout_constraintTop_toBottomOf="@+id/tvPopupDifficultHeader">
+                <LinearLayout
+                    android:id="@+id/llIndicatorLevel1"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_marginEnd="6dp"
+                    android:background="@drawable/item_oval"
+                    android:orientation="horizontal" />
+                <LinearLayout
+                    android:id="@+id/llIndicatorLevel2"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_marginEnd="6dp"
+                    android:background="@drawable/item_oval"
+                    android:orientation="horizontal" />
+                <LinearLayout
+                    android:id="@+id/llIndicatorLevel3"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:background="@drawable/item_oval"
+                    android:orientation="horizontal" />
+            </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
         android:id="@+id/tvBackMain"
-        style="@style/textBlue"
+        android:textColor="@color/blue_300"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="25dp"
-        android:elevation="15dp"
         android:text="@string/back"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"

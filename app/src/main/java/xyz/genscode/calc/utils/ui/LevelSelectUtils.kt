@@ -13,6 +13,8 @@ class LevelSelectUtils(private val onLevelSelectedListener: OnLevelSelectedListe
 
     @SuppressLint("ClickableViewAccessibility")
     fun setOnTouchEvent(b : ActivityMainBinding){
+        onLevelSelectedListener.onLevelSelected(1)
+
         b.llLevels.setOnTouchListener { view,  motionEvent ->
             when(motionEvent.action){
                 MotionEvent.ACTION_DOWN -> {

@@ -2,6 +2,7 @@
 <resources>
     <color name="blue_100">#90CBFF</color>
     <color name="blue_200">#5CAAFF</color>
+    <color name="blue_300">#53A5FF</color>
     <color name="blue_500">#3B99FF</color>
     <color name="blue_700">#0A77ED</color>
 
@@ -9,6 +10,15 @@
     <color name="easy_secondary">#23b7a6</color>
     <color name="easy_hint">#2A10FBE2</color>
 
+    <color name="medium">#EA9C3D</color>
+    <color name="medium_secondary">#B75723</color>
+    <color name="medium_hint">#2AFB8910</color>
+
+    <color name="hard">#EA3D3D</color>
+    <color name="hard_secondary">#B72323</color>
+    <color name="hard_hint">#2AFB1010</color>
+
+    <color name="grey_00">#52676767</color>
     <color name="grey_50">#F1F1F1</color>
     <color name="grey_200">#B3B3B3</color>
     <color name="grey_300">#888888</color>
