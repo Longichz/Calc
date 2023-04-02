@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:animateLayoutChanges="true">
 
     <LinearLayout
         android:orientation="horizontal"
@@ -14,7 +15,7 @@
         android:background="@drawable/gradient_easy"/>
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/tvMainHeader"
         style="@style/text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -31,19 +32,429 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/llPopupBackground"
         style="@style/popup"
+        android:animateLayoutChanges="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
+        <LinearLayout
+            android:visibility="invisible"
+            android:id="@+id/llProgress"
+            android:layout_width="match_parent"
+            android:layout_height="5dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/llTask"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:background="@drawable/gradient_progress"
+            android:orientation="horizontal" />
+
+        <!--STATS-->
+        <!--STATS-->
+        <!--STATS-->
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/llStats"
+            tools:visibility="visible"
+            android:visibility="gone"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <TextView
+                android:id="@+id/tvPopupStatsHeader"
+                style="@style/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/ibm_plex_sans_semibold"
+                android:text="@string/stats_header"
+                android:textSize="22sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/tvPopupStatsTaskHeader"
+                style="@style/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/tasks"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvPopupStatsHeader" />
+
+            <TextView
+                android:id="@+id/tvPopupStatsTask"
+                style="@style/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="20dp"
+                android:text="0/8"
+                android:textColor="@color/easy"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/tvPopupStatsTaskHeader"
+                app:layout_constraintTop_toBottomOf="@+id/tvPopupStatsHeader"
+                tools:ignore="HardcodedText,TextContrastCheck" />
+
+            <TextView
+                android:id="@+id/tvPopupStatsTimeHeader"
+                style="@style/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:text="@string/time"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvPopupStatsTaskHeader" />
+
+            <TextView
+                android:id="@+id/tvPopupStatsTime"
+                style="@style/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginTop="5dp"
+                android:text="0"
+                android:textColor="@color/easy"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/tvPopupStatsTimeHeader"
+                app:layout_constraintTop_toBottomOf="@+id/tvPopupStatsTaskHeader"
+                tools:ignore="HardcodedText,TextContrastCheck" />
+
+            <LinearLayout
+                android:id="@+id/llBackPopup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:background="@drawable/item_easy"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:minHeight="48dp"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvPopupStatsTimeHeader">
+
+                <TextView
+                    android:id="@+id/tvBackPopup"
+                    style="@style/text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="50dp"
+                    android:layout_marginVertical="12dp"
+                    android:text="@string/back"
+                    android:textColor="@color/easy_secondary"
+                    android:textSize="16sp"
+                    tools:ignore="TextContrastCheck" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--TASKS-->
+        <!--TASKS-->
+        <!--TASKS-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/llTask"
+
+            android:visibility="gone"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/tvPopupTaskHeader"
+                style="@style/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/ibm_plex_sans_semibold"
+                android:text="@string/taskHeader"
+                android:textSize="22sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                style="@style/item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:gravity="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvPopupTaskHeader">
+
+                <TextView
+                    android:id="@+id/tvPopupAnswer"
+                    style="@style/textSecondary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="12dp"
+                    android:text="0"
+                    android:textSize="16sp" />
+            </LinearLayout>
+
+            <!--KEYBOARD-->
+            <!--KEYBOARD-->
+            <!--KEYBOARD-->
+            <LinearLayout
+                android:id="@+id/llkeyBoard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="10dp"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:id="@+id/keyBoard1"
+                        style="@style/item"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="3dp">
+
+                        <TextView
+                            style="@style/textSecondary"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="17dp"
+                            android:paddingVertical="10dp"
+                            android:text="1"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/keyBoard2"
+                        style="@style/item"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="3dp">
+
+                        <TextView
+                            style="@style/textSecondary"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="17dp"
+                            android:paddingVertical="10dp"
+                            android:text="2"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/keyBoard3"
+                        style="@style/item"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="3dp">
+
+                        <TextView
+                            style="@style/textSecondary"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="17dp"
+                            android:paddingVertical="10dp"
+                            android:text="3"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/keyBoard4"
+                        style="@style/item"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="3dp">
+
+                        <TextView
+                            style="@style/textSecondary"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="17dp"
+                            android:paddingVertical="10dp"
+                            android:text="4"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/keyBoard5"
+                        style="@style/item"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="3dp">
+
+                        <TextView
+                            style="@style/textSecondary"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="17dp"
+                            android:paddingVertical="10dp"
+                            android:text="5"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/keyBoard6"
+                        style="@style/item"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="3dp">
+
+                        <TextView
+                            style="@style/textSecondary"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="17dp"
+                            android:paddingVertical="10dp"
+                            android:text="6"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="5dp">
+
+                    <LinearLayout
+                        android:id="@+id/keyBoard7"
+                        style="@style/item"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="3dp">
+
+                        <TextView
+                            style="@style/textSecondary"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="17dp"
+                            android:paddingVertical="10dp"
+                            android:text="7"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/keyBoard8"
+                        style="@style/item"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="3dp">
+
+                        <TextView
+                            style="@style/textSecondary"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="17dp"
+                            android:paddingVertical="10dp"
+                            android:text="8"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/keyBoard9"
+                        style="@style/item"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="3dp">
+
+                        <TextView
+                            style="@style/textSecondary"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="17dp"
+                            android:paddingVertical="10dp"
+                            android:text="9"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/keyBoard0"
+                        style="@style/item"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="3dp">
+
+                        <TextView
+                            style="@style/textSecondary"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="17dp"
+                            android:paddingVertical="10dp"
+                            android:text="0"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/keyBoardBack"
+                        style="@style/item"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="3dp">
+
+                        <TextView
+                            style="@style/textSecondary"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="17dp"
+                            android:paddingVertical="10dp"
+                            android:text="🔙"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!--LEVELS-->
+        <!--LEVELS-->
+        <!--LEVELS-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            tools:visibility="gone"
             android:id="@+id/llLevels"
             android:clickable="true"
             android:focusable="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:padding="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -118,7 +529,7 @@
                 style="@style/text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="20dp"
                 android:text="@string/time"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
@@ -130,7 +541,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="20dp"
                 android:text="15 сек."
                 android:textColor="@color/easy"
                 android:textSize="16sp"
@@ -192,7 +603,7 @@
                 android:id="@+id/llStart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="25dp"
                 android:background="@drawable/item_easy"
                 android:clickable="true"
                 android:focusable="true"
@@ -246,10 +657,6 @@
                     android:orientation="horizontal" />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -11,15 +11,15 @@
     <color name="easy_hint">#2A10FBE2</color>
 
     <color name="medium">#EA9C3D</color>
-    <color name="medium_secondary">#B75723</color>
-    <color name="medium_hint">#2AFB8910</color>
+    <color name="medium_secondary">#B76F23</color>
+    <color name="medium_hint">#2AF8A750</color>
 
     <color name="hard">#EA3D3D</color>
     <color name="hard_secondary">#B72323</color>
-    <color name="hard_hint">#2AFB1010</color>
+    <color name="hard_hint">#2AFF3030</color>
 
     <color name="grey_00">#52676767</color>
-    <color name="grey_50">#F1F1F1</color>
+    <color name="grey_50">#EEEEEE</color>
     <color name="grey_200">#B3B3B3</color>
     <color name="grey_300">#888888</color>
     <color name="grey_500">#676767</color>

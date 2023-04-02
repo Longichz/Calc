@@ -9,12 +9,17 @@
     <string name="back">Назад</string>
     <string name="sec">сек.</string>
 
+    <string name="stats_header">Статистика</string>
+    <string name="stats_tasks">Задания:</string>
+    <string name="statsHeader">Статистика</string>
+    <string name="taskHeader">Введите ваш ответ</string>
+
     <string name="level_1">Уровень 1</string>
     <string name="level_2">Уровень 2</string>
     <string name="level_3">Уровень 3</string>
 
     <string name="difficult_easy">Легкая</string>
     <string name="difficult_medium">Средняя</string>
-    <string name="difficult_hard">Сложная</string>
+    <string name="difficult_hard">Максимальная</string>
     <string name="difficult">Сложность:</string>
 </resources>
