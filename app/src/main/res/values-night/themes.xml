@@ -13,6 +13,9 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
     </style>
+    <style name="background" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:background">@color/grey_700</item>
+    </style>
     <style name="text" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:textColor">@color/white</item>
         <item name="android:fontFamily">@font/ibm_plex_sans_medium</item>
@@ -30,5 +33,11 @@
     </style>
     <style name="popup" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="android:background">@drawable/popup_night</item>
+    </style>
+    <style name="message" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:background">@drawable/message_night</item>
+    </style>
+    <style name="message_2" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:background">@drawable/message_night_2</item>
     </style>
 </resources>

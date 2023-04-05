@@ -2,6 +2,8 @@
     <string name="app_name">Calc</string>
     <string name="select_task">Выберите задание</string>
     <string name="multiply">Таблица умножения</string>
+    <string name="sum">Сложение</string>
+    <string name="dif">Вычитание</string>
     <string name="task_for_time">Задания на время</string>
     <string name="tasks">Задания:</string>
     <string name="time">Время:</string>
@@ -14,11 +16,16 @@
     <string name="statsHeader">Статистика</string>
     <string name="taskHeader">Введите ваш ответ</string>
 
+    <string name="stop_task">Вы уверены?</string>
+    <string name="stop_task_no">Отмена</string>
+    <string name="stop_task_yes">Завершить уровень</string>
+
     <string name="level_1">Уровень 1</string>
     <string name="level_2">Уровень 2</string>
     <string name="level_3">Уровень 3</string>
 
     <string name="difficult_easy">Легкая</string>
+    <string name="difficult_easy_task">Легкие примеры</string>
     <string name="difficult_medium">Средняя</string>
     <string name="difficult_hard">Максимальная</string>
     <string name="difficult">Сложность:</string>

@@ -25,25 +25,42 @@
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTaskHeader">
+        app:layout_constraintTop_toBottomOf="@id/tvTaskHeader">
         <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <LinearLayout
-                android:id="@+id/llTaskMultiply"
+                android:id="@+id/llTaskSum"
                 android:layout_marginHorizontal="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
                 style="@style/item">
-                <ImageView
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="75dp"
+                    android:layout_height="match_parent"
                     android:layout_marginEnd="15dp"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginVertical="20dp"
-                    android:layout_width="43dp"
-                    android:layout_height="43dp"
-                    android:src="@drawable/multiply"/>
+                    android:background="@drawable/item_multiply"
+                    android:gravity="center_horizontal">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:gravity="center">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="@style/textSecondary"
+                            android:fontFamily="@font/ibm_plex_sans_bold"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            android:text="3 + 6"/>
+                    </LinearLayout>
+
+                </LinearLayout>
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -53,17 +70,156 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         style="@style/text"
-                        android:fontFamily="@font/ibm_plex_sans_bold"
+                        android:fontFamily="@font/ibm_plex_sans_semibold"
                         android:textSize="16sp"
-                        android:text="@string/multiply"/>
+                        android:text="@string/sum"/>
                     <TextView
+                        android:layout_marginTop="3dp"
                         android:layout_marginBottom="15dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         style="@style/textSecondary"
                         android:alpha="0.7"
                         android:textSize="14sp"
-                        android:text="@string/task_for_time"/>
+                        android:text="@string/difficult_easy_task"/>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/llTaskDif"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                style="@style/item">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="75dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/item_multiply"
+                    android:gravity="center_horizontal">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:gravity="center">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="@style/textSecondary"
+                            android:fontFamily="@font/ibm_plex_sans_bold"
+                            android:textColor="@color/white"
+                            android:textSize="16sp"
+                            android:text="7 - 2"/>
+                    </LinearLayout>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_marginTop="15dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/text"
+                        android:fontFamily="@font/ibm_plex_sans_semibold"
+                        android:textSize="16sp"
+                        android:text="@string/dif"/>
+                    <TextView
+                        android:layout_marginTop="3dp"
+                        android:layout_marginBottom="15dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/textSecondary"
+                        android:alpha="0.7"
+                        android:textSize="14sp"
+                        android:text="@string/difficult_easy_task"/>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/llTaskMultiply"
+                android:layout_marginTop="10dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                style="@style/item">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="75dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginEnd="15dp"
+                    android:background="@drawable/item_multiply"
+                    android:gravity="center_horizontal">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:layout_marginEnd="3dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="@style/textSecondary"
+                            android:fontFamily="@font/ibm_plex_sans_bold"
+                            android:textColor="@color/white"
+                            android:textSize="12sp"
+                            android:text="X"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:layout_marginEnd="5dp">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            style="@style/textSecondary"
+                            android:fontFamily="@font/ibm_plex_sans_semibold"
+                            android:textColor="@color/white"
+                            android:textSize="18sp"
+                            android:text="2"/>
+                        <LinearLayout
+                            android:layout_width="11dp"
+                            android:layout_height="2dp"
+                            android:background="@color/white"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="-4dp"
+                            style="@style/textSecondary"
+                            android:fontFamily="@font/ibm_plex_sans_semibold"
+                            android:textColor="@color/white"
+                            android:textSize="18sp"
+                            android:text="2"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_marginTop="15dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/text"
+                        android:fontFamily="@font/ibm_plex_sans_semibold"
+                        android:textSize="16sp"
+                        android:text="@string/multiply"/>
+                    <TextView
+                        android:layout_marginTop="3dp"
+                        android:layout_marginBottom="15dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/textSecondary"
+                        android:alpha="0.7"
+                        android:textSize="14sp"
+                        android:text="@string/difficult_easy_task"/>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>

@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:animateLayoutChanges="true">
+    android:animateLayoutChanges="true"
+    style="@style/background">
 
     <LinearLayout
         android:orientation="horizontal"
@@ -423,6 +424,25 @@
                     </LinearLayout>
 
                     <LinearLayout
+                        android:id="@+id/keyBoardMinus"
+                        style="@style/item"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="3dp">
+
+                        <TextView
+                            style="@style/textSecondary"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:paddingHorizontal="17dp"
+                            android:paddingVertical="10dp"
+                            android:text="-"
+                            android:textSize="16sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:id="@+id/keyBoardBack"
                         style="@style/item"
                         android:clickable="true"
@@ -672,5 +692,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="TextContrastCheck" />
+
+    <include
+        android:id="@+id/includeStopTask"
+        android:visibility="gone"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        layout="@layout/stop_task"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
