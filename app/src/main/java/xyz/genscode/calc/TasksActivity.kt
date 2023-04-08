@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import xyz.genscode.calc.data.LevelHandler
+import xyz.genscode.calc.data.SettingsHandler
 import xyz.genscode.calc.databinding.ActivityTasksBinding
 import xyz.genscode.calc.utils.ui.HoverUtils
 
@@ -14,6 +15,9 @@ class TasksActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         b = ActivityTasksBinding.inflate(layoutInflater)
         setContentView(b.root)
+
+        //Загружаем настройки
+        SettingsHandler.instance.getSettings(this)
 
         //Назначаем Hover
         HoverUtils().setHover(b.llTaskMultiply)

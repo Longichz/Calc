@@ -52,12 +52,79 @@
             android:background="@drawable/gradient_progress"
             android:orientation="horizontal" />
 
+        <!--STATS (RecyclerView)-->
+        <!--STATS (RecyclerView)-->
+        <!--STATS (RecyclerView)-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/llStatsInstances"
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clickable="true"
+            android:focusable="true"
+            android:padding="20dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            >
+
+            <TextView
+                android:id="@+id/tvPopupStatsInstancesHeader"
+                style="@style/text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/ibm_plex_sans_semibold"
+                android:text="@string/stats_header"
+                android:textSize="22sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvStats"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                app:layout_constraintHeight_max="200dp"
+                app:layout_constraintBottom_toTopOf="@+id/llBackInstancesPopup"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvPopupStatsInstancesHeader" />
+
+            <LinearLayout
+                android:id="@+id/llBackInstancesPopup"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/item_easy"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:minHeight="48dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <TextView
+                    android:id="@+id/tvBackInstancesPopup"
+                    style="@style/text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="50dp"
+                    android:layout_marginVertical="12dp"
+                    android:text="@string/back"
+                    android:textColor="@color/easy_secondary"
+                    android:textSize="16sp"
+                    tools:ignore="TextContrastCheck" />
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <!--STATS-->
         <!--STATS-->
         <!--STATS-->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/llStats"
-            tools:visibility="visible"
+
             android:visibility="gone"
             android:clickable="true"
             android:focusable="true"
@@ -129,31 +196,66 @@
                 tools:ignore="HardcodedText,TextContrastCheck" />
 
             <LinearLayout
-                android:id="@+id/llBackPopup"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:background="@drawable/item_easy"
-                android:clickable="true"
-                android:focusable="true"
-                android:gravity="center"
-                android:minHeight="48dp"
                 android:orientation="horizontal"
+                android:layout_marginTop="25dp"
+                android:weightSum="5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tvPopupStatsTimeHeader">
-
-                <TextView
-                    android:id="@+id/tvBackPopup"
-                    style="@style/text"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:id="@+id/llBackPopup"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="50dp"
-                    android:layout_marginVertical="12dp"
-                    android:text="@string/back"
-                    android:textColor="@color/easy_secondary"
-                    android:textSize="16sp"
-                    tools:ignore="TextContrastCheck" />
+                    android:layout_weight="2"
+                    android:layout_marginEnd="5dp"
+                    android:background="@drawable/item_easy"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:minHeight="48dp"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:id="@+id/tvBackPopup"
+                        style="@style/text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="12dp"
+                        android:text="@string/back"
+                        android:textColor="@color/easy_secondary"
+                        android:textSize="16sp"
+                        tools:ignore="TextContrastCheck" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llStatsShow"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:background="@drawable/item_easy"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:gravity="center"
+                    android:minHeight="48dp"
+                    android:layout_weight="3"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        style="@style/text"
+                        android:id="@+id/tvStatsShow"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="12dp"
+                        android:text="@string/stats_show"
+                        android:textColor="@color/easy_secondary"
+                        android:textSize="16sp"
+                        tools:ignore="TextContrastCheck" />
+                </LinearLayout>
             </LinearLayout>
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <!--TASKS-->
@@ -448,17 +550,16 @@
                         android:clickable="true"
                         android:focusable="true"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="3dp">
+                        android:layout_height="wrap_content">
 
-                        <TextView
-                            style="@style/textSecondary"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:paddingHorizontal="17dp"
-                            android:paddingVertical="10dp"
-                            android:text="🔙"
-                            android:textSize="16sp" />
+                        <ImageView
+                            style="@style/tint"
+                            android:layout_width="20dp"
+                            android:layout_height="21dp"
+                            android:layout_marginHorizontal="12dp"
+                            android:layout_marginVertical="10dp"
+                            android:src="@drawable/back"
+                        />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
@@ -469,7 +570,7 @@
         <!--LEVELS-->
         <!--LEVELS-->
         <androidx.constraintlayout.widget.ConstraintLayout
-            tools:visibility="gone"
+
             android:id="@+id/llLevels"
             android:clickable="true"
             android:focusable="true"
@@ -537,8 +638,9 @@
                     android:clickable="true"
                     android:focusable="true"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="@+id/ll"
+
+                    app:layout_constraintEnd_toEndOf="@+id/ll"
+                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
@@ -676,6 +778,8 @@
                     android:background="@drawable/item_oval"
                     android:orientation="horizontal" />
             </LinearLayout>
+
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -685,8 +789,8 @@
         android:textColor="@color/blue_300"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="25dp"
+        android:paddingVertical="20dp"
+        android:paddingHorizontal="25dp"
         android:text="@string/back"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -699,6 +803,13 @@
         android:layout_height="match_parent"
         android:layout_width="match_parent"
         layout="@layout/stop_task"
+        />
+    <include
+        android:id="@+id/includeHint"
+        android:visibility="gone"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        layout="@layout/hint"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -34,6 +34,8 @@ class SimpleLevels(val level : Int, val type : Int, var b : ActivityMainBinding)
     fun startLevel(){
         id = 1
 
+        LevelHandler.instance.tasks.clear()
+
         //Показываем для popup меню примеров
         b.llLevels.visibility = View.GONE
         b.tvBackMain.visibility = View.GONE
@@ -101,8 +103,6 @@ class SimpleLevels(val level : Int, val type : Int, var b : ActivityMainBinding)
             b.tvPopupAnswer.removeTextChangedListener(tvListener)
 
             this.id = -1
-
-            LevelHandler.instance.tasks.clear()
 
             return
         }
@@ -213,6 +213,15 @@ class SimpleLevels(val level : Int, val type : Int, var b : ActivityMainBinding)
             showCorrect()
         }else{
             showError()
+        }
+
+        //Закрываем окно завершения задания если оно открыто
+        if(id == tasks){
+            b.includeStopTask.llStopTaskBackground.animate().scaleX(1.05f).scaleY(1.05f).setDuration(100).start()
+            Handler().postDelayed({
+                b.includeStopTask.llStopTaskBackground.animate().alpha(0f).scaleX(0.9f).scaleY(0.9f).setDuration(250).start()
+                b.includeStopTask.root.visibility = View.GONE
+            },100)
         }
     }
 

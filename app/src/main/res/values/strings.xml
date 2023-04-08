@@ -1,6 +1,6 @@
 <resources>
-    <string name="app_name">Calc</string>
-    <string name="select_task">Выберите задание</string>
+    <string name="app_name">Математический тренажёр</string>
+    <string name="select_block">Выберите раздел</string>
     <string name="multiply">Таблица умножения</string>
     <string name="sum">Сложение</string>
     <string name="dif">Вычитание</string>
@@ -13,6 +13,7 @@
 
     <string name="stats_header">Статистика</string>
     <string name="stats_tasks">Задания:</string>
+    <string name="stats_show">См. подробности</string>
     <string name="statsHeader">Статистика</string>
     <string name="taskHeader">Введите ваш ответ</string>
 
@@ -29,4 +30,5 @@
     <string name="difficult_medium">Средняя</string>
     <string name="difficult_hard">Максимальная</string>
     <string name="difficult">Сложность:</string>
+    <string name="select_level">Вы можете выбирать уровни</string>
 </resources>

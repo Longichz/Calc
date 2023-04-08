@@ -9,12 +9,16 @@ import android.view.Window
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import xyz.genscode.calc.data.LevelHandler
+import xyz.genscode.calc.data.SettingsHandler
 import xyz.genscode.calc.data.SimpleLevels
+import xyz.genscode.calc.data.StatsAdapter
 import xyz.genscode.calc.databinding.ActivityMainBinding
 import xyz.genscode.calc.interfaces.OnLevelSelectedListener
 import xyz.genscode.calc.utils.ChangeColorUtils
 import xyz.genscode.calc.utils.Vibrator
+import xyz.genscode.calc.utils.ui.HintUtils
 import xyz.genscode.calc.utils.ui.HoverUtils
 import xyz.genscode.calc.utils.ui.KeyboardUtils
 import xyz.genscode.calc.utils.ui.LevelSelectUtils
@@ -57,7 +61,9 @@ class MainActivity : AppCompatActivity(), OnLevelSelectedListener {
         hoverUtils.setHover(b.keyBoard3); hoverUtils.setHover(b.keyBoard4); hoverUtils.setHover(b.keyBoard5)
         hoverUtils.setHover(b.keyBoard6); hoverUtils.setHover(b.keyBoard7); hoverUtils.setHover(b.keyBoard8)
         hoverUtils.setHover(b.keyBoard9); hoverUtils.setHover(b.keyBoardBack)
+
         hoverUtils.setHover(b.includeStopTask.llStopTask); hoverUtils.setHover(b.includeStopTask.llCancelStopTask);
+        hoverUtils.setHover(b.llStatsShow); hoverUtils.setHover(b.llBackInstancesPopup)
 
         //Устанавливаем клавитуру
         KeyboardUtils(b).setKeyBoard()
@@ -76,11 +82,14 @@ class MainActivity : AppCompatActivity(), OnLevelSelectedListener {
             simpleLevels = SimpleLevels(LevelHandler.instance.currentLevel, type, b)
             simpleLevels?.startLevel()
         }
+
+        //Нажатие на кнопки назад
         b.llBackPopup.setOnClickListener {
-            b.llTask.visibility = View.GONE
-            b.llStats.visibility = View.GONE
-            b.llLevels.visibility = View.VISIBLE
-            b.tvBackMain.visibility = View.VISIBLE
+            b.llTask.visibility = View.GONE; b.llStats.visibility = View.GONE; b.llStatsInstances.visibility = View.GONE;
+            b.llLevels.visibility = View.VISIBLE; b.tvBackMain.visibility = View.VISIBLE
+        }
+        b.llBackInstancesPopup.setOnClickListener {
+            b.llStatsInstances.visibility = View.GONE; b.llStats.visibility = View.VISIBLE
         }
 
         //Слушатели нажатий на кнопки окна завершения задания
@@ -90,6 +99,24 @@ class MainActivity : AppCompatActivity(), OnLevelSelectedListener {
             hideStopTask()
         }
 
+        //Слушатель на статистику
+        b.llStatsShow.setOnClickListener {
+            b.llTask.visibility = View.GONE
+            b.llStats.visibility = View.GONE
+            b.llLevels.visibility = View.GONE
+            b.llStatsInstances.visibility = View.VISIBLE
+            b.tvBackMain.visibility = View.GONE
+
+            val adapter = StatsAdapter(this, LevelHandler.instance.tasks)
+            val linearLayoutManager = LinearLayoutManager(this)
+            b.rvStats.layoutManager = linearLayoutManager
+            b.rvStats.adapter = adapter
+        }
+
+        //Если обучение ни разу не было пройдено, запускаем его
+        if(SettingsHandler.instance.hint){
+            HintUtils(b).startLevelChangeHint()
+        }
     }
 
     fun setHeader(){
@@ -121,7 +148,11 @@ class MainActivity : AppCompatActivity(), OnLevelSelectedListener {
                 b.tvPopupStatsTask.setTextColor(ContextCompat.getColor(this, R.color.easy))
                 b.tvPopupStatsTime.setTextColor(ContextCompat.getColor(this, R.color.easy))
                 b.tvBackPopup.setTextColor(ContextCompat.getColor(this, R.color.easy_secondary))
+                b.tvBackInstancesPopup.setTextColor(ContextCompat.getColor(this, R.color.easy_secondary))
+                b.tvStatsShow.setTextColor(ContextCompat.getColor(this, R.color.easy_secondary))
                 b.llBackPopup.background = ContextCompat.getDrawable(this, R.drawable.item_easy)
+                b.llStatsShow.background = ContextCompat.getDrawable(this, R.drawable.item_easy)
+                b.llBackInstancesPopup.background = ContextCompat.getDrawable(this, R.drawable.item_easy)
 
                 //Меняем цвет индикаторов
                 b.llIndicatorLevel2.background = ContextCompat.getDrawable(this, R.drawable.item_oval)
@@ -151,7 +182,11 @@ class MainActivity : AppCompatActivity(), OnLevelSelectedListener {
                 b.tvPopupStatsTask.setTextColor(ContextCompat.getColor(this, R.color.medium))
                 b.tvPopupStatsTime.setTextColor(ContextCompat.getColor(this, R.color.medium))
                 b.tvBackPopup.setTextColor(ContextCompat.getColor(this, R.color.medium_secondary))
+                b.tvBackInstancesPopup.setTextColor(ContextCompat.getColor(this, R.color.medium_secondary))
+                b.tvStatsShow.setTextColor(ContextCompat.getColor(this, R.color.medium_secondary))
                 b.llBackPopup.background = ContextCompat.getDrawable(this, R.drawable.item_medium)
+                b.llStatsShow.background = ContextCompat.getDrawable(this, R.drawable.item_medium)
+                b.llBackInstancesPopup.background = ContextCompat.getDrawable(this, R.drawable.item_medium)
 
                 //Меняем цвет индикаторов
                 b.llIndicatorLevel1.background = ContextCompat.getDrawable(this, R.drawable.item_oval)
@@ -181,7 +216,11 @@ class MainActivity : AppCompatActivity(), OnLevelSelectedListener {
                 b.tvPopupStatsTask.setTextColor(ContextCompat.getColor(this, R.color.hard))
                 b.tvPopupStatsTime.setTextColor(ContextCompat.getColor(this, R.color.hard))
                 b.tvBackPopup.setTextColor(ContextCompat.getColor(this, R.color.hard_secondary))
+                b.tvBackInstancesPopup.setTextColor(ContextCompat.getColor(this, R.color.hard_secondary))
+                b.tvStatsShow.setTextColor(ContextCompat.getColor(this, R.color.hard_secondary))
                 b.llBackPopup.background = ContextCompat.getDrawable(this, R.drawable.item_hard)
+                b.llStatsShow.background = ContextCompat.getDrawable(this, R.drawable.item_hard)
+                b.llBackInstancesPopup.background = ContextCompat.getDrawable(this, R.drawable.item_hard)
 
                 //Меняем цвет индикаторов
                 b.llIndicatorLevel1.background = ContextCompat.getDrawable(this, R.drawable.item_oval)
@@ -197,7 +236,6 @@ class MainActivity : AppCompatActivity(), OnLevelSelectedListener {
     }
 
     fun showStopTask(){
-        isStopTaskShowed = true
         b.includeStopTask.root.visibility = View.VISIBLE
         b.includeStopTask.llStopTaskBackground.alpha = 0f
         b.includeStopTask.llStopTaskBackground.scaleX = 0.9f
@@ -209,7 +247,6 @@ class MainActivity : AppCompatActivity(), OnLevelSelectedListener {
         },150)
     }
     fun hideStopTask(){
-        isStopTaskShowed = false
         b.includeStopTask.llStopTaskBackground.animate().scaleX(1.05f).scaleY(1.05f).setDuration(100).start()
         Handler().postDelayed({
             b.includeStopTask.llStopTaskBackground.animate().alpha(0f).scaleX(0.9f).scaleY(0.9f).setDuration(250).start()
@@ -219,7 +256,7 @@ class MainActivity : AppCompatActivity(), OnLevelSelectedListener {
 
     override fun onBackPressed() {
         //Проверяем открыто ли stopTask окно
-        if(isStopTaskShowed){
+        if(b.includeStopTask.root.visibility == View.VISIBLE){
             hideStopTask() //закрываем
             return
         }

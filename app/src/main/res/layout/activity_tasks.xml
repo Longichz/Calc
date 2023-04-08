@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
         android:fontFamily="@font/ibm_plex_sans_semibold"
-        android:text="@string/select_task"
+        android:text="@string/select_block"
         android:textSize="22sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
