@@ -12,8 +12,9 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import xyz.genscode.calc.data.LevelHandler
 import xyz.genscode.calc.data.SettingsHandler
-import xyz.genscode.calc.data.SimpleLevels
+import xyz.genscode.calc.data.levels.SimpleLevels
 import xyz.genscode.calc.data.StatsAdapter
+import xyz.genscode.calc.data.levels.MediumLevels
 import xyz.genscode.calc.databinding.ActivityMainBinding
 import xyz.genscode.calc.interfaces.OnLevelSelectedListener
 import xyz.genscode.calc.utils.ChangeColorUtils
@@ -28,8 +29,10 @@ class MainActivity : AppCompatActivity(), OnLevelSelectedListener {
     var changeColorUtils = ChangeColorUtils(this)
     var changeColorUtils2 = ChangeColorUtils(this)
     var simpleLevels : SimpleLevels? = null
+    var mediumLevels : MediumLevels? = null
     var isStopTaskShowed = false
     var type = LevelHandler.TYPE_MULTIPLY
+    var level = LevelHandler.LEVEL_SIMPLE
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +49,7 @@ class MainActivity : AppCompatActivity(), OnLevelSelectedListener {
 
         //Получаем тип заданий
         type = intent.getIntExtra("type", LevelHandler.TYPE_MULTIPLY)
+        level = intent.getIntExtra("level", LevelHandler.LEVEL_SIMPLE)
         setHeader()
 
         //Назначаем для ScrollView width (для реализации переключения уровня свайпом)
@@ -79,8 +83,14 @@ class MainActivity : AppCompatActivity(), OnLevelSelectedListener {
 
         //Нажатие на старт
         b.llStart.setOnClickListener {
-            simpleLevels = SimpleLevels(LevelHandler.instance.currentLevel, type, b)
-            simpleLevels?.startLevel()
+            if(level == LevelHandler.LEVEL_SIMPLE) {
+                simpleLevels = SimpleLevels(LevelHandler.instance.currentLevel, type, b)
+                simpleLevels?.startLevel()
+            }
+            if(level == LevelHandler.LEVEL_MEDIUM) {
+                mediumLevels = MediumLevels(LevelHandler.instance.currentLevel, type, b)
+                mediumLevels?.startLevel()
+            }
         }
 
         //Нажатие на кнопки назад
@@ -122,8 +132,12 @@ class MainActivity : AppCompatActivity(), OnLevelSelectedListener {
     fun setHeader(){
         when(type){
             LevelHandler.TYPE_SUM -> b.tvMainHeader.text = resources.getString(R.string.sum)
+            LevelHandler.TYPE_DIV -> b.tvMainHeader.text = resources.getString(R.string.div)
             LevelHandler.TYPE_DIF -> b.tvMainHeader.text = resources.getString(R.string.dif)
             LevelHandler.TYPE_MULTIPLY -> b.tvMainHeader.text = resources.getString(R.string.multiply)
+            LevelHandler.TYPE_SQUARED -> b.tvMainHeader.text = resources.getString(R.string.squared)
+            LevelHandler.TYPE_CUBED -> b.tvMainHeader.text = resources.getString(R.string.cubed)
+            LevelHandler.TYPE_RANDOM -> b.tvMainHeader.text = resources.getString(R.string.random)
         }
     }
 
@@ -136,6 +150,8 @@ class MainActivity : AppCompatActivity(), OnLevelSelectedListener {
                 b.tvPopupTime.text = "${LevelHandler.getTime(type, 1)} ${resources.getString(R.string.sec)}"
                 b.tvPopupTasks.text = "${LevelHandler.getTasks(type, 1)}"
                 b.tvPopupDifficult.text = resources.getString(R.string.difficult_easy)
+
+                if(type == LevelHandler.TYPE_RANDOM) b.tvPopupTime.text = resources.getString(R.string.undefined)
 
                 //Анимированно меняем цвет
                 changeColorUtils.setColor(b.tvPopupTime, R.color.easy)
@@ -171,6 +187,8 @@ class MainActivity : AppCompatActivity(), OnLevelSelectedListener {
                 b.tvPopupTasks.text = "${LevelHandler.getTasks(type, 2)}"
                 b.tvPopupDifficult.text = resources.getString(R.string.difficult_medium)
 
+                if(type == LevelHandler.TYPE_RANDOM) b.tvPopupTime.text = resources.getString(R.string.undefined)
+
                 //Анимированно меняем цвет
                 changeColorUtils.setColor(b.tvPopupTime, R.color.medium)
                 changeColorUtils.setColor(b.tvPopupTasks, R.color.medium)
@@ -204,6 +222,8 @@ class MainActivity : AppCompatActivity(), OnLevelSelectedListener {
                 b.tvPopupTime.text = "${LevelHandler.getTime(type, 3)} ${resources.getString(R.string.sec)}"
                 b.tvPopupTasks.text = "${LevelHandler.getTasks(type, 3)}"
                 b.tvPopupDifficult.text = resources.getString(R.string.difficult_hard)
+
+                if(type == LevelHandler.TYPE_RANDOM) b.tvPopupTime.text = resources.getString(R.string.undefined)
 
                 //Анимированно меняем цвет
                 changeColorUtils.setColor(b.tvPopupTime, R.color.hard)

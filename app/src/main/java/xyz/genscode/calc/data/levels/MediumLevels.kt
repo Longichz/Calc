@@ -1,4 +1,4 @@
-package xyz.genscode.calc.data
+package xyz.genscode.calc.data.levels
 
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
@@ -8,15 +8,15 @@ import android.text.TextWatcher
 import android.view.View
 import androidx.core.content.ContextCompat
 import xyz.genscode.calc.R
+import xyz.genscode.calc.data.LevelHandler
 import xyz.genscode.calc.databinding.ActivityMainBinding
 import xyz.genscode.calc.models.Task
 import xyz.genscode.calc.utils.ChangeColorUtils
-import java.util.logging.Level
+import kotlin.math.pow
 
-//SimpleLevels это простые уровни, генерирующие примеры только с двумя числами (+, -, *)
-//Например 2*5, 2-6 и т.п
-class SimpleLevels(val level : Int, val type : Int, var b : ActivityMainBinding) {
-
+//MediumLevels это уровни средней сложности, генерирующие примеры с двумя действиями (+, -, *, /)
+//Например (2*5) * 2, (13-5) / (5+2)
+class MediumLevels(val level : Int, val type : Int, var b : ActivityMainBinding) {
     private val valueAnimator = ValueAnimator.ofFloat(0f, 1f)
     private lateinit var tvListener: TextWatcher
 
@@ -24,9 +24,14 @@ class SimpleLevels(val level : Int, val type : Int, var b : ActivityMainBinding)
 
     var time = 0 //время на каждое задание
     var tasks = 0 //количество заданий
+    var _type = 0 //_type добавляет конкретный тип задания, потому что type класса может равняться рандому
 
     private var _a = 0
     private var _b = 0
+    private var _c = 0
+    private var _d = 0
+    private var firstPartAnswer = -1
+    private var secondPartAnswer = -1
     private var correctAnswer = -1
 
     var id = 0 //id задачи на данный момент
@@ -42,7 +47,7 @@ class SimpleLevels(val level : Int, val type : Int, var b : ActivityMainBinding)
         b.llTask.visibility = View.VISIBLE
 
         //Определяем какой уровень выбран и получаем для него настройки
-        time = LevelHandler.getTime(type, level)
+        if(type != LevelHandler.TYPE_RANDOM) time = LevelHandler.getTime(type, level)
         tasks = LevelHandler.getTasks(type, level)
 
         //Слушатель ответа для досрочного ответа
@@ -97,7 +102,8 @@ class SimpleLevels(val level : Int, val type : Int, var b : ActivityMainBinding)
             //Подсчитываем время
             val timeNow = System.currentTimeMillis()
             val timeFormatted = timeNow - timeStats
-            b.tvPopupStatsTime.text = "${(timeFormatted/1000).toInt()} ${b.ll.context.resources.getString(R.string.sec)}"
+            b.tvPopupStatsTime.text = "${(timeFormatted/1000).toInt()} ${b.ll.context.resources.getString(
+                R.string.sec)}"
 
             //Удаляем слушатель изменения текста
             b.tvPopupAnswer.removeTextChangedListener(tvListener)
@@ -109,74 +115,45 @@ class SimpleLevels(val level : Int, val type : Int, var b : ActivityMainBinding)
 
         b.tvPopupAnswer.text = ""
 
+        //Определяем тип действия в скобках
+        _type = kotlin.random.Random.nextInt(1, 3)
+
+        time = LevelHandler.getTime(_type, level)
+
         //Область значений для примеров на умножения
-        var from = 1
-        var until = 50
-
-        when(type){
-            //ОЗ для умножения
+        when(type) {
             LevelHandler.TYPE_MULTIPLY -> {
-                when (level) {
-                    1 -> {
-                        from = 1
-                        until = 9
-                    }
-                    2 -> {
-                        from = 2
-                        until = 9
-                    }
-                    3 -> {
-                        from = -9
-                        until = 9
-                    }
-                }
-            }
-
-            //ОЗ для сложения и вычитания
-            else -> {
-                when (level) {
-                    1 -> {
-                        from = 0
-                        until = 9
-                    }
-                    2 -> {
-                        from = 4
-                        until = 35
-                    }
-                    3 -> {
-                        from = -50
-                        until = 50
-                    }
+                //создаем значения в скобках которые не превысят в конечном итоге 9
+                if (_type == LevelHandler.TYPE_DIF) { //действие в скобках -
+                    _a = kotlin.random.Random.nextInt(0, 25)
+                    _b = kotlin.random.Random.nextInt(_a - 9, _a)
+                    _c = kotlin.random.Random.nextInt(0, 25)
+                    _d = kotlin.random.Random.nextInt(_c - 9, _c)
+                    firstPartAnswer = _a - _b
+                    secondPartAnswer = _c - _d
+                } else if (_type == LevelHandler.TYPE_SUM) { //действие в скобках +
+                    _a = kotlin.random.Random.nextInt(0, 9)
+                    _b = kotlin.random.Random.nextInt(0, 9 - _a)
+                    _c = kotlin.random.Random.nextInt(0, 9)
+                    _d = kotlin.random.Random.nextInt(0,  9 - _a)
+                    firstPartAnswer = _a + _b
+                    secondPartAnswer = _c + _d
                 }
             }
         }
 
-        //Создаем a и b, и вычисляем правильный ответ
-        _a = kotlin.random.Random.nextInt(from, until)
-        _b = kotlin.random.Random.nextInt(from, until)
-
-        //Для первого и второго уровня исключаем минусовые ответы и сложные ситуации (5 + -2)
-        if(level <= 2 && _a < 0) _a = -_a //убираем минусовое значение у _a
-        if(level <= 2 && _b < 0) _b = -_b //убираем минусовое значение у _b
-        if(level <= 2 && type != LevelHandler.TYPE_MULTIPLY) if(_b > _a) {val temp = _b; _b = _a; _a = temp} //устанавливаем, что a - всегда максимальное
-
         when(type){
-            LevelHandler.TYPE_MULTIPLY ->{
-                correctAnswer = _a * _b
-            }
-            LevelHandler.TYPE_SUM ->{
-                correctAnswer = _a + _b
-            }
-            LevelHandler.TYPE_DIF ->{
-                correctAnswer = _a - _b
+            LevelHandler.TYPE_MULTIPLY -> {
+                correctAnswer = firstPartAnswer * secondPartAnswer
             }
         }
 
         //отображаем пример
-        var str_a = "$_a"; var str_b = "$_b";
-        if(_a < 0) str_a = "($_a)";
-        if(_b < 0) str_b = "($_b)"
-        b.tvMainHeader.text = "$str_a ${LevelHandler.getChar(type)} $str_b"
+        var str_a = "$_a"; var str_b = "$_b"; var str_c = "$_c"; var str_d = "$_d"; //создаем строку для каждого члена
+        //если число в минусе, отображаем в скобках как (-9)
+        if(_a < 0) str_a = "($_a)"; if(_b < 0) str_b = "($_b)"; if(_c < 0) str_c = "($_c)"; if(_d < 0) str_d = "($_d)"
+        b.tvMainHeader.text=
+            "($str_a${LevelHandler.getChar(_type)}$str_b) ${LevelHandler.getChar(type)} ($str_c${LevelHandler.getChar(_type)}$str_d)"
 
         //Таймер, указывающий когда произойдет принудительная проверка на правльный ответ
         Handler().postDelayed({
@@ -206,7 +183,7 @@ class SimpleLevels(val level : Int, val type : Int, var b : ActivityMainBinding)
         try{ answer = Integer.parseInt(b.tvPopupAnswer.text.toString()) }catch (e : java.lang.Exception){ }
 
         //Добавляем задачу
-        LevelHandler.instance.tasks.add(Task(_a, _b, answer, correctAnswer, type))
+        LevelHandler.instance.tasks.add(Task(_a, _b, _c, _d, answer, correctAnswer, type, _type))
 
         //Проверяем правильность ответа
         if (answer == correctAnswer){
@@ -261,8 +238,12 @@ class SimpleLevels(val level : Int, val type : Int, var b : ActivityMainBinding)
     fun setHeader(){
         when(type){
             LevelHandler.TYPE_SUM -> b.tvMainHeader.text = b.ll.context.resources.getString(R.string.sum)
+            LevelHandler.TYPE_DIV -> b.tvMainHeader.text = b.ll.context.resources.getString(R.string.div)
             LevelHandler.TYPE_DIF -> b.tvMainHeader.text = b.ll.context.resources.getString(R.string.dif)
             LevelHandler.TYPE_MULTIPLY -> b.tvMainHeader.text = b.ll.context.resources.getString(R.string.multiply)
+            LevelHandler.TYPE_SQUARED -> b.tvMainHeader.text = b.ll.context.resources.getString(R.string.squared)
+            LevelHandler.TYPE_CUBED -> b.tvMainHeader.text = b.ll.context.resources.getString(R.string.cubed)
+            LevelHandler.TYPE_RANDOM -> b.tvMainHeader.text = b.ll.context.getString(R.string.random)
         }
     }
 

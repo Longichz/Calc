@@ -1,7 +1,14 @@
 <resources>
     <string name="app_name">Математический тренажёр</string>
+    <string name="app_version">1.0.0.0</string>
+    <string name="app_build">1-open-source</string>
+
+    <string name="app_version_header">Версия</string>
+    <string name="app_build_header">Сборка</string>
+
     <string name="select_block">Выберите раздел</string>
     <string name="multiply">Таблица умножения</string>
+    <string name="div">Деление</string>
     <string name="sum">Сложение</string>
     <string name="dif">Вычитание</string>
     <string name="task_for_time">Задания на время</string>
@@ -11,15 +18,41 @@
     <string name="back">Назад</string>
     <string name="sec">сек.</string>
 
+    <string name="random">Случайно</string>
+    <string name="squared">Квадрат числа</string>
+    <string name="squared_hint">Легко</string>
+    <string name="cubed">Куб числа</string>
+    <string name="cubed_hint">Сложно</string>
+
     <string name="stats_header">Статистика</string>
     <string name="stats_tasks">Задания:</string>
     <string name="stats_show">См. подробности</string>
     <string name="statsHeader">Статистика</string>
     <string name="taskHeader">Введите ваш ответ</string>
+    <string name="undefined">Не определено</string>
 
     <string name="stop_task">Вы уверены?</string>
     <string name="stop_task_no">Отмена</string>
     <string name="stop_task_yes">Завершить уровень</string>
+
+    <string name="settings">Настройки</string>
+    <string name="settings_theme">Тема</string>
+    <string name="settings_theme_day">Дневная</string>
+    <string name="settings_theme_night">Ночная</string>
+    <string name="settings_theme_auto">Авто</string>
+    <string name="settings_hint">Обучение</string>
+    <string name="settings_hint_clear">Пройти заново</string>
+    <string name="settings_vibro">Вибрация</string>
+    <string name="settings_app">О приложении</string>
+    <string name="settings_app_dev_header">О разработчике</string>
+    <string name="settings_on">Включить</string>
+    <string name="settings_off">Отключить</string>
+
+    <string name="app_dev_name">GENS</string>
+    <string name="app_dev_site_header">Сайт</string>
+    <string name="app_dev_site">genscode.xyz</string>
+    <string name="app_dev_show">Показать информацию \n о разработчике</string>
+    <string name="app_dev_hide">Скрыть информацию \n о разработчике</string>
 
     <string name="level_1">Уровень 1</string>
     <string name="level_2">Уровень 2</string>
@@ -27,8 +60,11 @@
 
     <string name="difficult_easy">Легкая</string>
     <string name="difficult_easy_task">Легкие примеры</string>
+    <string name="difficult_medium_task">Сложные примеры</string>
     <string name="difficult_medium">Средняя</string>
     <string name="difficult_hard">Максимальная</string>
     <string name="difficult">Сложность:</string>
     <string name="select_level">Вы можете выбирать уровни</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

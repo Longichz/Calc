@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".SettingsActivity"
+    android:animateLayoutChanges="true"
+    >
+
+    <TextView
+        android:id="@+id/tvSettingsHeader"
+        style="@style/text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:fontFamily="@font/ibm_plex_sans_semibold"
+        android:text="@string/settings"
+        android:textSize="22sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvSettingsBack"
+        android:textColor="@color/blue_300"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:paddingVertical="20dp"
+        android:paddingHorizontal="25dp"
+        android:text="@string/back"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="TextContrastCheck" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:overScrollMode="always"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSettingsHeader">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:animateLayoutChanges="true"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/llTheme"
+                style="@style/item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:id="@+id/tvSettingsThemeHeader"
+                    style="@style/text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/ibm_plex_sans_semibold"
+                    android:text="@string/settings_theme"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="15dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="25dp"
+                    android:weightSum="3"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvSettingsThemeHeader"
+                    tools:layout_editor_absoluteX="15dp">
+
+                    <LinearLayout
+                        android:id="@+id/llThemeDay"
+                        android:layout_width="0dp"
+                        android:layout_height="210dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:weightSum="4">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="4"
+                            android:alpha="0.8"
+                            android:src="@drawable/day" />
+
+                        <TextView
+                            style="@style/text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_weight="1"
+                            android:text="@string/settings_theme_day"
+                            android:textAlignment="center" />
+
+                        <LinearLayout
+                            android:id="@+id/llDayIndicator"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/turn_on"
+                            android:orientation="horizontal"
+                            android:weightSum="1" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llThemeNight"
+                        android:layout_width="0dp"
+                        android:layout_height="210dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:weightSum="4">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="4"
+                            android:alpha="0.8"
+                            android:src="@drawable/night" />
+
+                        <TextView
+                            style="@style/text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_weight="1"
+                            android:text="@string/settings_theme_night"
+                            android:textAlignment="center" />
+
+                        <LinearLayout
+                            android:id="@+id/llNightIndicator"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/turn_off"
+                            android:orientation="horizontal"
+                            android:weightSum="1" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llThemeAuto"
+                        android:layout_width="0dp"
+                        android:layout_height="210dp"
+                        android:layout_weight="1"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:gravity="center_horizontal"
+                        android:orientation="vertical"
+                        android:weightSum="4">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="4"
+                            android:alpha="0.8"
+                            android:src="@drawable/auto" />
+
+                        <TextView
+                            style="@style/text"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="10dp"
+                            android:layout_weight="1"
+                            android:text="@string/settings_theme_auto"
+                            android:textAlignment="center" />
+
+                        <LinearLayout
+                            android:id="@+id/llAutoIndicator"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:layout_marginTop="10dp"
+                            android:background="@drawable/turn_off"
+                            android:orientation="horizontal"
+                            android:weightSum="1" />
+                    </LinearLayout>
+                </LinearLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/llVibro"
+                style="@style/item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
+                    android:id="@+id/tvSettingsVibroHeader"
+                    style="@style/text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="15dp"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/ibm_plex_sans_semibold"
+                    android:text="@string/settings_vibro"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvSettingsVibroStatus"
+                    style="@style/textSecondary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="15dp"
+                    android:layout_marginEnd="20dp"
+                    android:text="@string/settings_off"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/llHint"
+                style="@style/item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
+                    android:id="@+id/tvSettingsHintHeader"
+                    style="@style/text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="15dp"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/ibm_plex_sans_semibold"
+                    android:text="@string/settings_hint"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tvSettingsHintStatus"
+                    style="@style/textSecondary"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="15dp"
+                    android:layout_marginEnd="20dp"
+                    android:text="@string/settings_off"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/llAbout"
+                style="@style/item"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:focusable="true">
+
+                <TextView
+                    style="@style/text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginVertical="15dp"
+                    android:layout_marginStart="20dp"
+                    android:fontFamily="@font/ibm_plex_sans_semibold"
+                    android:text="@string/settings_app"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    style="@style/tint"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_marginEnd="15dp"
+                    android:alpha="0.5"
+                    android:src="@drawable/next"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fcvAbout"
+        android:name="xyz.genscode.calc.fragments.About"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvSettingsHeader"
+        android:visibility="gone"
+        tools:layout="@layout/fragment_about" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

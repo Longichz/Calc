@@ -44,8 +44,9 @@ class StatsAdapter(var context: Context, var tasks: ArrayList<Task>) : RecyclerV
         var str_a = "$_a"; var str_b = "$_b";
         if(_a < 0) str_a = "($_a)" //Если а минусовое - добавляем скобки
         if(_b < 0) str_b = "($_b)" //Если b минусовое - добавляем скобки
-
-        var instance = "$str_a ${LevelHandler.getChar(type)} $str_b = $correctAnswer "
+        if(type == LevelHandler.TYPE_SQUARED) str_b = "²" //настройка для квадрата чисел
+        if(type == LevelHandler.TYPE_CUBED) str_b = "³" //настройка для куба чисел
+        var instance = "$str_a${LevelHandler.getChar(type)}$str_b = $correctAnswer "
         if(correctAnswer != answer){
             //Красный цвет примера если ответы не сходятся
             holder.tvInstance.setTextColor(ContextCompat.getColor(context, R.color.hard))

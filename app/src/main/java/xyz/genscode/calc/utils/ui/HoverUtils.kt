@@ -14,7 +14,7 @@ class HoverUtils{
                 MotionEvent.ACTION_DOWN -> {
                     view.animate().scaleX(0.98f).scaleY(0.98f).alpha(0.6f).setDuration(50).start()
                 }
-                MotionEvent.ACTION_UP ->{
+                MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL ->{
                     Handler().postDelayed({
                         view.animate().scaleX(1f).scaleY(1f).alpha(1f).start()
                     }, 50)
