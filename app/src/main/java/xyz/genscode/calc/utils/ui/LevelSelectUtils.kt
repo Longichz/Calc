@@ -23,7 +23,7 @@ class LevelSelectUtils(private val onLevelSelectedListener: OnLevelSelectedListe
                 MotionEvent.ACTION_MOVE -> {
                     b.llPopupHeaderContent.x = motionEvent.x - startX
                 }
-                MotionEvent.ACTION_UP -> {
+                MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                     //Определяем абсолютную позицию первого и второго уровня
                     val level2View = Rect()
                     val level3View = Rect()

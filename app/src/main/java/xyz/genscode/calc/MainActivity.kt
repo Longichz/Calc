@@ -12,9 +12,8 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import xyz.genscode.calc.data.LevelHandler
 import xyz.genscode.calc.data.SettingsHandler
-import xyz.genscode.calc.data.levels.SimpleLevels
 import xyz.genscode.calc.data.StatsAdapter
-import xyz.genscode.calc.data.levels.MediumLevels
+import xyz.genscode.calc.data.levels.Controller
 import xyz.genscode.calc.databinding.ActivityMainBinding
 import xyz.genscode.calc.interfaces.OnLevelSelectedListener
 import xyz.genscode.calc.utils.ChangeColorUtils
@@ -24,15 +23,14 @@ import xyz.genscode.calc.utils.ui.HoverUtils
 import xyz.genscode.calc.utils.ui.KeyboardUtils
 import xyz.genscode.calc.utils.ui.LevelSelectUtils
 
+@Suppress("DEPRECATION")
 class MainActivity : AppCompatActivity(), OnLevelSelectedListener {
     lateinit var b : ActivityMainBinding
     var changeColorUtils = ChangeColorUtils(this)
     var changeColorUtils2 = ChangeColorUtils(this)
-    var simpleLevels : SimpleLevels? = null
-    var mediumLevels : MediumLevels? = null
-    var isStopTaskShowed = false
+    var controller : Controller? = null
     var type = LevelHandler.TYPE_MULTIPLY
-    var level = LevelHandler.LEVEL_SIMPLE
+    var difficult = LevelHandler.LEVEL_SIMPLE
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +47,7 @@ class MainActivity : AppCompatActivity(), OnLevelSelectedListener {
 
         //Получаем тип заданий
         type = intent.getIntExtra("type", LevelHandler.TYPE_MULTIPLY)
-        level = intent.getIntExtra("level", LevelHandler.LEVEL_SIMPLE)
+        difficult = intent.getIntExtra("level", LevelHandler.LEVEL_SIMPLE)
         setHeader()
 
         //Назначаем для ScrollView width (для реализации переключения уровня свайпом)
@@ -66,7 +64,7 @@ class MainActivity : AppCompatActivity(), OnLevelSelectedListener {
         hoverUtils.setHover(b.keyBoard6); hoverUtils.setHover(b.keyBoard7); hoverUtils.setHover(b.keyBoard8)
         hoverUtils.setHover(b.keyBoard9); hoverUtils.setHover(b.keyBoardBack)
 
-        hoverUtils.setHover(b.includeStopTask.llStopTask); hoverUtils.setHover(b.includeStopTask.llCancelStopTask);
+        hoverUtils.setHover(b.includeStopTask.llStopTask); hoverUtils.setHover(b.includeStopTask.llCancelStopTask)
         hoverUtils.setHover(b.llStatsShow); hoverUtils.setHover(b.llBackInstancesPopup)
 
         //Устанавливаем клавитуру
@@ -83,19 +81,13 @@ class MainActivity : AppCompatActivity(), OnLevelSelectedListener {
 
         //Нажатие на старт
         b.llStart.setOnClickListener {
-            if(level == LevelHandler.LEVEL_SIMPLE) {
-                simpleLevels = SimpleLevels(LevelHandler.instance.currentLevel, type, b)
-                simpleLevels?.startLevel()
-            }
-            if(level == LevelHandler.LEVEL_MEDIUM) {
-                mediumLevels = MediumLevels(LevelHandler.instance.currentLevel, type, b)
-                mediumLevels?.startLevel()
-            }
+            controller = Controller(LevelHandler.instance.currentLevel, type, difficult, b)
+            controller?.startLevel()
         }
 
         //Нажатие на кнопки назад
         b.llBackPopup.setOnClickListener {
-            b.llTask.visibility = View.GONE; b.llStats.visibility = View.GONE; b.llStatsInstances.visibility = View.GONE;
+            b.llTask.visibility = View.GONE; b.llStats.visibility = View.GONE; b.llStatsInstances.visibility = View.GONE
             b.llLevels.visibility = View.VISIBLE; b.tvBackMain.visibility = View.VISIBLE
         }
         b.llBackInstancesPopup.setOnClickListener {
@@ -105,7 +97,7 @@ class MainActivity : AppCompatActivity(), OnLevelSelectedListener {
         //Слушатели нажатий на кнопки окна завершения задания
         b.includeStopTask.llCancelStopTask.setOnClickListener { hideStopTask() }
         b.includeStopTask.llStopTask.setOnClickListener {
-            simpleLevels?.cancel()
+            controller?.cancel()
             hideStopTask()
         }
 
@@ -136,7 +128,6 @@ class MainActivity : AppCompatActivity(), OnLevelSelectedListener {
             LevelHandler.TYPE_DIF -> b.tvMainHeader.text = resources.getString(R.string.dif)
             LevelHandler.TYPE_MULTIPLY -> b.tvMainHeader.text = resources.getString(R.string.multiply)
             LevelHandler.TYPE_SQUARED -> b.tvMainHeader.text = resources.getString(R.string.squared)
-            LevelHandler.TYPE_CUBED -> b.tvMainHeader.text = resources.getString(R.string.cubed)
             LevelHandler.TYPE_RANDOM -> b.tvMainHeader.text = resources.getString(R.string.random)
         }
     }
@@ -147,7 +138,7 @@ class MainActivity : AppCompatActivity(), OnLevelSelectedListener {
             1 -> { //Первый
                 if (LevelHandler.instance.currentLevel == 1) return
 
-                b.tvPopupTime.text = "${LevelHandler.getTime(type, 1)} ${resources.getString(R.string.sec)}"
+                b.tvPopupTime.text = "${LevelHandler.getTime(type, 1, difficult)} ${resources.getString(R.string.sec)}"
                 b.tvPopupTasks.text = "${LevelHandler.getTasks(type, 1)}"
                 b.tvPopupDifficult.text = resources.getString(R.string.difficult_easy)
 
@@ -183,7 +174,7 @@ class MainActivity : AppCompatActivity(), OnLevelSelectedListener {
             2 -> { //Второй
                 if (LevelHandler.instance.currentLevel == 2) return
 
-                b.tvPopupTime.text = "${LevelHandler.getTime(type, 2)} ${resources.getString(R.string.sec)}"
+                b.tvPopupTime.text = "${LevelHandler.getTime(type, 2, difficult)} ${resources.getString(R.string.sec)}"
                 b.tvPopupTasks.text = "${LevelHandler.getTasks(type, 2)}"
                 b.tvPopupDifficult.text = resources.getString(R.string.difficult_medium)
 
@@ -219,7 +210,7 @@ class MainActivity : AppCompatActivity(), OnLevelSelectedListener {
             3 -> { //Третий
                 if (LevelHandler.instance.currentLevel == 3) return
 
-                b.tvPopupTime.text = "${LevelHandler.getTime(type, 3)} ${resources.getString(R.string.sec)}"
+                b.tvPopupTime.text = "${LevelHandler.getTime(type, 3, difficult)} ${resources.getString(R.string.sec)}"
                 b.tvPopupTasks.text = "${LevelHandler.getTasks(type, 3)}"
                 b.tvPopupDifficult.text = resources.getString(R.string.difficult_hard)
 
@@ -282,11 +273,12 @@ class MainActivity : AppCompatActivity(), OnLevelSelectedListener {
         }
 
         //Проверяем запущен ли уровень
-        if(simpleLevels?.id != 0 && simpleLevels?.id != -1 &&
-            simpleLevels?.id != simpleLevels?.tasks){
+        if(controller?.id != 0 && controller?.id != -1 &&
+            controller?.id != controller?.tasks?.plus(1)){
             showStopTask() //открываем stopTask окно
             return
         }
+
         super.onBackPressed()
     }
 

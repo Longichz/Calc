@@ -32,14 +32,14 @@ class LevelHandler private constructor() {
         private const val LEVEL3_DIV_TIME = 4
         private const val LEVEL3_DIV_TASKS = 12
 
-        //Квадрат числа (настройка распространяется и на куб числа)
+        //Квадрат числа
         private const val LEVEL1_SQUARED_TIME = 10
         private const val LEVEL1_SQUARED_TASKS = 8
 
         private const val LEVEL2_SQUARED_TIME = 5
         private const val LEVEL2_SQUARED_TASKS = 10
 
-        private const val LEVEL3_SQUARED_TIME = 30
+        private const val LEVEL3_SQUARED_TIME = 3
         private const val LEVEL3_SQUARED_TASKS = 12
 
         //Сумма (настройка распространяется и на вычитание)
@@ -55,30 +55,31 @@ class LevelHandler private constructor() {
         const val TYPE_DIF = 2
         const val TYPE_DIV = 3
         const val TYPE_SQUARED = 4
-        const val TYPE_CUBED = 5
         const val TYPE_RANDOM = 6
 
         const val LEVEL_SIMPLE = 0
         const val LEVEL_MEDIUM = 1
 
         //Метод возвращает время для конкретного типа и уровня
-        fun getTime(type : Int, level : Int) : Int{
+        fun getTime(type : Int, level : Int, diff :Int) : Int {
             when(type){
                 TYPE_MULTIPLY -> {
                     when(level){
-                        1 -> return LEVEL1_MULTIPLY_TIME
-                        2 -> return LEVEL2_MULTIPLY_TIME
-                        3 -> return LEVEL3_MULTIPLY_TIME
+                        //для сложных примеров добавляем ко времени доп секунды в зависимости от уровня
+                        1 -> return if(diff == LEVEL_MEDIUM) {LEVEL1_MULTIPLY_TIME+20}else{LEVEL1_MULTIPLY_TIME}
+                        2 -> return if(diff == LEVEL_MEDIUM) {LEVEL2_MULTIPLY_TIME+16}else{LEVEL2_MULTIPLY_TIME}
+                        3 -> return if(diff == LEVEL_MEDIUM) {LEVEL3_MULTIPLY_TIME+18}else{LEVEL3_MULTIPLY_TIME}
                     }
                 }
                 TYPE_DIV -> {
                     when(level){
-                        1 -> return LEVEL1_DIV_TIME
-                        2 -> return LEVEL2_DIV_TIME
-                        3 -> return LEVEL3_DIV_TIME
+                        //для сложных примеров добавляем ко времени доп секунды в зависимости от уровня
+                        1 -> return if(diff == LEVEL_MEDIUM) {LEVEL1_DIV_TIME+20}else{LEVEL1_DIV_TIME}
+                        2 -> return if(diff == LEVEL_MEDIUM) {LEVEL2_DIV_TIME+16}else{LEVEL2_DIV_TIME}
+                        3 -> return if(diff == LEVEL_MEDIUM) {LEVEL3_DIV_TIME+18}else{LEVEL3_DIV_TIME}
                     }
                 }
-                TYPE_SQUARED, TYPE_CUBED -> {
+                TYPE_SQUARED -> {
                     when(level){
                         1 -> return LEVEL1_SQUARED_TIME
                         2 -> return LEVEL2_SQUARED_TIME
@@ -86,7 +87,7 @@ class LevelHandler private constructor() {
                     }
                 }
                 else -> {
-                    return LEVEL_SUM_TIME
+                    return if(diff == LEVEL_MEDIUM) {LEVEL_SUM_TIME+20}else{LEVEL_SUM_TIME}
                 }
             }
             return 0
@@ -109,7 +110,7 @@ class LevelHandler private constructor() {
                         3 -> return LEVEL3_DIV_TASKS
                     }
                 }
-                TYPE_SQUARED, TYPE_CUBED -> {
+                TYPE_SQUARED -> {
                     when(level){
                         1 -> return LEVEL1_SQUARED_TASKS
                         2 -> return LEVEL2_SQUARED_TASKS
@@ -142,7 +143,7 @@ class LevelHandler private constructor() {
                 TYPE_DIF -> {
                     return " - "
                 }
-                TYPE_SQUARED, TYPE_CUBED -> {
+                TYPE_SQUARED -> {
                     return ""
                 }
             }

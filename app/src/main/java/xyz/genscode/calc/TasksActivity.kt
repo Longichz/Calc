@@ -25,50 +25,76 @@ class TasksActivity : AppCompatActivity() {
         HoverUtils().setHover(b.llTaskDif)
         HoverUtils().setHover(b.llTaskSum)
         HoverUtils().setHover(b.llTaskDiv)
-        HoverUtils().setHover(b.llTaskSquared)
-        HoverUtils().setHover(b.llTaskCubed)
-        HoverUtils().setHover(b.llTaskEasyRandom)
+
         HoverUtils().setHover(b.llTaskMultiplyMedium)
+        HoverUtils().setHover(b.llTaskDifMedium)
+        HoverUtils().setHover(b.llTaskSumMedium)
+        HoverUtils().setHover(b.llTaskDivMedium)
+
+        HoverUtils().setHover(b.llTaskSquared)
+
+        HoverUtils().setHover(b.llTaskEasyRandom)
+        HoverUtils().setHover(b.llTaskMediumRandom)
+
         HoverUtils().setHover(b.ivOpenSettings)
 
         val intent = Intent(this, MainActivity::class.java)
         b.llTaskMultiply.setOnClickListener {//умножение
             intent.putExtra("type", LevelHandler.TYPE_MULTIPLY)
+            intent.putExtra("level", LevelHandler.LEVEL_SIMPLE)
             startActivity(intent)
         }
-
         b.llTaskSum.setOnClickListener {//сложение
             intent.putExtra("type", LevelHandler.TYPE_SUM)
+            intent.putExtra("level", LevelHandler.LEVEL_SIMPLE)
             startActivity(intent)
         }
-
         b.llTaskDif.setOnClickListener {//вычитание
             intent.putExtra("type", LevelHandler.TYPE_DIF)
+            intent.putExtra("level", LevelHandler.LEVEL_SIMPLE)
+            startActivity(intent)
+        }
+        b.llTaskDiv.setOnClickListener {//деление
+            intent.putExtra("type", LevelHandler.TYPE_DIV)
+            intent.putExtra("level", LevelHandler.LEVEL_SIMPLE)
             startActivity(intent)
         }
 
-        b.llTaskDiv.setOnClickListener {//деление
+        b.llTaskMultiplyMedium.setOnClickListener {//умножение (сложно)
+            intent.putExtra("type", LevelHandler.TYPE_MULTIPLY)
+            intent.putExtra("level", LevelHandler.LEVEL_MEDIUM)
+            startActivity(intent)
+        }
+        b.llTaskDivMedium.setOnClickListener {//деление (сложно)
             intent.putExtra("type", LevelHandler.TYPE_DIV)
+            intent.putExtra("level", LevelHandler.LEVEL_MEDIUM)
+            startActivity(intent)
+        }
+        b.llTaskSumMedium.setOnClickListener {//сложение (сложно)
+            intent.putExtra("type", LevelHandler.TYPE_SUM)
+            intent.putExtra("level", LevelHandler.LEVEL_MEDIUM)
+            startActivity(intent)
+        }
+        b.llTaskDifMedium.setOnClickListener {//вычитание (сложно)
+            intent.putExtra("type", LevelHandler.TYPE_DIF)
+            intent.putExtra("level", LevelHandler.LEVEL_MEDIUM)
             startActivity(intent)
         }
 
         b.llTaskEasyRandom.setOnClickListener {//рандом
             intent.putExtra("type", LevelHandler.TYPE_RANDOM)
+            intent.putExtra("level", LevelHandler.LEVEL_SIMPLE)
+            startActivity(intent)
+        }
+        b.llTaskMediumRandom.setOnClickListener {//рандом (сложно)
+            intent.putExtra("type", LevelHandler.TYPE_RANDOM)
+            intent.putExtra("level", LevelHandler.LEVEL_MEDIUM)
             startActivity(intent)
         }
 
         b.llTaskSquared.setOnClickListener {//квадрат
             intent.putExtra("type", LevelHandler.TYPE_SQUARED)
-            startActivity(intent)
-        }
-
-        b.llTaskCubed.setOnClickListener {//куб
-            intent.putExtra("type", LevelHandler.TYPE_CUBED)
-            startActivity(intent)
-        }
-        b.llTaskMultiplyMedium.setOnClickListener {//куб
-            intent.putExtra("type", LevelHandler.TYPE_MULTIPLY)
-            intent.putExtra("level", LevelHandler.LEVEL_MEDIUM)
+            intent.putExtra("level", LevelHandler.LEVEL_SIMPLE)
             startActivity(intent)
         }
 

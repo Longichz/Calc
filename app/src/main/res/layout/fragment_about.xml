@@ -159,12 +159,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="40dp"
-                    android:layout_marginEnd="10dp"
+                    android:layout_marginHorizontal="20dp"
                     android:gravity="center"
                     android:orientation="horizontal"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:background="@drawable/message_day">
 
                     <ImageView
                         android:id="@+id/ivDevLogo"
@@ -180,6 +181,7 @@
                         android:fontFamily="@font/ibm_plex_sans_bold"
                         android:text="@string/app_dev_name"
                         android:textColor="@color/black"
+                        android:layout_marginEnd="10dp"
                         android:textSize="30sp" />
                 </LinearLayout>
 
@@ -196,7 +198,7 @@
                         style="@style/textSecondary"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginHorizontal="15dp"
+                        android:layout_marginHorizontal="20dp"
                         android:layout_marginTop="33dp"
                         android:text="@string/settings_app_dev_header"
                         android:textSize="15sp" />

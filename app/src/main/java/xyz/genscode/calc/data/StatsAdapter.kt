@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import xyz.genscode.calc.R
 import xyz.genscode.calc.models.Task
+import xyz.genscode.calc.utils.DrawTaskUitls
 import java.util.*
 
 class StatsAdapter(var context: Context, var tasks: ArrayList<Task>) : RecyclerView.Adapter<StatsAdapter.StatsListView>() {
@@ -37,16 +38,18 @@ class StatsAdapter(var context: Context, var tasks: ArrayList<Task>) : RecyclerV
         val correctAnswer = task.correctAnswer //Корректный ответ
         val answer = task.answer //Ответ пользователя
         val type = task.type //Тип
+        val typeParts = task.typeParts //Тип в скобках
+        val difficult = task.difficult //Сложность
         val _a = task.a //a
         val _b = task.b //b
+        val _c = task.c //c
+        val _d = task.d //d
 
         //Отображаем пример
-        var str_a = "$_a"; var str_b = "$_b";
-        if(_a < 0) str_a = "($_a)" //Если а минусовое - добавляем скобки
-        if(_b < 0) str_b = "($_b)" //Если b минусовое - добавляем скобки
-        if(type == LevelHandler.TYPE_SQUARED) str_b = "²" //настройка для квадрата чисел
-        if(type == LevelHandler.TYPE_CUBED) str_b = "³" //настройка для куба чисел
-        var instance = "$str_a${LevelHandler.getChar(type)}$str_b = $correctAnswer "
+        var instance = ""
+
+        instance = DrawTaskUitls().taskToStr(task, true)
+
         if(correctAnswer != answer){
             //Красный цвет примера если ответы не сходятся
             holder.tvInstance.setTextColor(ContextCompat.getColor(context, R.color.hard))

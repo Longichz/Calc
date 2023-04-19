@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">Математический тренажёр</string>
-    <string name="app_version">1.0.0.0</string>
-    <string name="app_build">1-open-source</string>
+    <string name="app_version" translatable="false">1.0.0.0</string>
+    <string name="app_build" translatable="false">1-open-source</string>
+    <string name="lang">Русский</string>
 
     <string name="app_version_header">Версия</string>
     <string name="app_build_header">Сборка</string>
@@ -48,9 +49,9 @@
     <string name="settings_on">Включить</string>
     <string name="settings_off">Отключить</string>
 
-    <string name="app_dev_name">GENS</string>
+    <string name="app_dev_name" translatable="false">GENS</string>
     <string name="app_dev_site_header">Сайт</string>
-    <string name="app_dev_site">genscode.xyz</string>
+    <string name="app_dev_site" translatable="false">genscode.xyz</string>
     <string name="app_dev_show">Показать информацию \n о разработчике</string>
     <string name="app_dev_hide">Скрыть информацию \n о разработчике</string>
 
@@ -65,6 +66,5 @@
     <string name="difficult_hard">Максимальная</string>
     <string name="difficult">Сложность:</string>
     <string name="select_level">Вы можете выбирать уровни</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
