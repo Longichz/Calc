@@ -35,25 +35,9 @@ class MediumLevels{
                 if(typeParts == LevelHandler.TYPE_SUM){ //умножение -> сложение
                     //Генерируем числа
                     _a = kotlin.random.Random.nextInt(from, until)
-                    if(_a < 0){
-                        _b = kotlin.random.Random.nextInt(0-_a, 9-_a)
-                    }else {
-                        if(level == 1) {
-                            _b = kotlin.random.Random.nextInt(from, 9 - _a)
-                        }else{
-                            _b = kotlin.random.Random.nextInt(-9-_a, 9 - _a)
-                        }
-                    }
+                    _b = kotlin.random.Random.nextInt(-9 + -_a, 10 + -_a)
                     _c = kotlin.random.Random.nextInt(from, until)
-                    if(_c < 0){
-                        _d = kotlin.random.Random.nextInt(0-_c, 9-_c)
-                    }else {
-                        if(level == 1) {
-                            _d = kotlin.random.Random.nextInt(from, 9 - _c)
-                        }else{
-                            _d = kotlin.random.Random.nextInt(-9-_c, 9 - _c)
-                        }
-                    }
+                    _d = kotlin.random.Random.nextInt(-9 + -_c, 10 + -_c)
 
                     firstPartAnswer = _a + _b
                     secondPartAnswer = _c + _d
@@ -62,25 +46,10 @@ class MediumLevels{
                 if(typeParts == LevelHandler.TYPE_DIF){ //умножение -> вычитание
                     //Генерируем числа
                     _a = kotlin.random.Random.nextInt(from, until)
-                    if(_a < 0){
-                        _b = kotlin.random.Random.nextInt(0+_a, -(9+_a))
-                    }else {
-                        if(9 - _a >= 0) {
-                            _b = kotlin.random.Random.nextInt(9 - _a,_a + 9)
-                        }else{
-                            _b = kotlin.random.Random.nextInt(-(9 - _a), _a)
-                        }
-                    }
+                    _b = kotlin.random.Random.nextInt(-9 + _a, 10 + _a)
+
                     _c = kotlin.random.Random.nextInt(from, until)
-                    if(_c < 0){
-                        _d = kotlin.random.Random.nextInt(0+_c, -(9+_c))
-                    }else {
-                        if(9 - _c >= 0) {
-                            _d = kotlin.random.Random.nextInt(9 - _c, _c + 9)
-                        }else{
-                            _d = kotlin.random.Random.nextInt(-(9 - _c), _c)
-                        }
-                    }
+                    _d = kotlin.random.Random.nextInt(-9 + _c, 10 + _c)
 
                     firstPartAnswer = _a - _b
                     secondPartAnswer = _c - _d
@@ -149,9 +118,9 @@ class MediumLevels{
                     // Если знаменатель не является делителем числителя или результат деления больше или равен 9, генерируем новые числа
                 }while (denominator == 0 //не делим на ноль
                     || numerator % denominator != 0 //полученные части делятся на цело
-                    || numerator / denominator >= 10 //полученные части делятся в пределах таблтцы умножения до 10
+                    || numerator / denominator >= 9 //полученные части делятся в пределах таблтцы умножения до 9
                     || numerator == denominator //полученные части не равны
-                    || denominator > 10 || denominator < 10) //делитель не больше и не меньше 10
+                    || denominator > 9 || denominator < 9) //делитель не больше и не меньше 9
                 firstPartAnswer = numerator
                 secondPartAnswer = denominator
             }
